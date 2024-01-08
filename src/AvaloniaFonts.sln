@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaFonts", "AvaloniaFonts\AvaloniaFonts.csproj", "{BE15A29A-9965-4FDA-8C89-34AD59C670A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE15A29A-9965-4FDA-8C89-34AD59C670A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE15A29A-9965-4FDA-8C89-34AD59C670A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE15A29A-9965-4FDA-8C89-34AD59C670A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE15A29A-9965-4FDA-8C89-34AD59C670A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D31893F-5B6E-4DDE-9490-B994CE3F3562}
+	EndGlobalSection
+EndGlobal
