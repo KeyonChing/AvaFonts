@@ -1,7 +1,7 @@
-安装说明：
-0.请确保vs2022已经正确安装扩展：“Avalonia for Visual Studio 2022”
-1.下载Release中的“AvaloniaVS.VS2022.zip”，解压后双击安装AvaloniaVS.VS2022.vsix
-2.安装完毕后打开vs2022，点击菜单“扩展”--“管理扩展”--“已安装”--“Avalonia for Visual Studio 2022”
-3.查看版本是否为：11.5.5，若是，则安装成功
-4.将“自动更新此扩展”取消勾选
-5.打开你的解决方案即可显示设计器
+- 安装说明：
+  - 0.请确保vs2022已经正确安装扩展：“Avalonia for Visual Studio 2022”
+  - 1.下载Release中的“AvaloniaVS.VS2022.zip”，解压后双击安装AvaloniaVS.VS2022.vsix
+  - 2.安装完毕后打开vs2022，点击菜单“扩展”--“管理扩展”--“已安装”--“Avalonia for Visual Studio 2022”
+  - 3.查看版本是否为：11.5.5，若是，则安装成功
+  - 4.将“自动更新此扩展”取消勾选
+  - 5.打开你的解决方案即可显示设计器
