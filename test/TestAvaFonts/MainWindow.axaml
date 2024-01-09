@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="800" Height="480"
+        x:Class="TestAvaFonts.MainWindow"
+        Title="TestAvaFonts" FontSize="26">
+	<Grid>
+		<StackPanel>
+			<Label Content="我是一个自定义字体1234567890abc Thin" FontWeight="Thin"/>
+			<Label Content="我是一个自定义字体1234567890abc Light" FontWeight="Light"/>
+			<Label Content="我是一个自定义字体1234567890abc Regular" FontWeight="Regular"/>
+			<Label Content="我是一个自定义字体1234567890abc Normal"/>
+			<Label Content="我是一个自定义字体1234567890abc Normal Italic" FontStyle="Italic"/>
+			<Label Content="我是一个自定义字体1234567890abc Medium" FontWeight="Medium"/>
+			<Label Content="我是一个自定义字体1234567890abc Bold" FontWeight="Bold"/>
+			<Label Content="我是一个自定义字体1234567890abc Black" FontWeight="Black"/>
+			
+			<Label Content="我是一个自定义字体1234567890abc" FontFamily="ZJGL"/>
+			<Label Content="我是一个自定义字体1234567890abc" FontFamily="ZJGL" FontWeight="Bold"/>
+			<Label Content="我是一个自定义字体1234567890abc" FontFamily="ZJGL" FontStyle="Italic"/>
+			<Label Content="我是一个自定义字体1234567890abc" FontFamily="ZJGL" FontWeight="Bold" FontStyle="Italic"/>
+		</StackPanel>
+	</Grid>
+</Window>
