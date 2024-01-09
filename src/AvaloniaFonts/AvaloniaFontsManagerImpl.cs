@@ -151,7 +151,69 @@ namespace Avalonia.Benchmarks
             }
             catch { return null; }
         }
+ private IGlyphTypeface GetFont(string fontName, FontStyle style, FontWeight weight)
+ {
+     try
+     {
+         SKTypeface skTypeface;
 
+         FontInfo fontif = InstalledFont.Find(x => x.FontName == fontName);
+         if (fontif.SubFonts.Count > 0)
+         {
+             var f = fontif.SubFonts.Find(x => (x.FontWeight == weight && x.FontStyle == style));
+             if (f != null)//是否全部符合
+             {
+                 skTypeface = SKTypeface.FromFile(f.FontPath);
+                 return new Skia.GlyphTypefaceImpl(skTypeface, FontSimulations.None);
+             }
+             else
+             {//第二侧重字体粗细，是否符合当前粗细
+                 f = fontif.SubFonts.Find(x => (x.FontWeight == weight));
+                 if (f != null)
+                 {
+                     skTypeface = SKTypeface.FromFile(f.FontPath);
+                     return new Skia.GlyphTypefaceImpl(skTypeface, style == FontStyle.Normal ? FontSimulations.None : FontSimulations.Oblique);
+                 }
+                 else
+                 {//第三侧重字体样式，是否符合当前样式
+                     f = fontif.SubFonts.Find(x => (x.FontStyle == style && (x.FontWeight == FontWeight.Normal || x.FontWeight == FontWeight.Regular)));
+                     if (f != null)
+                     {
+                         skTypeface = SKTypeface.FromFile(f.FontPath);
+                         return new Skia.GlyphTypefaceImpl(skTypeface, weight == FontWeight.Bold ? FontSimulations.Bold : FontSimulations.None);
+                     }
+                     else
+                     {//最后，全部不匹配，返回normal,若还没有，跳Exception
+                         f = fontif.SubFonts.Find(x => (x.FontWeight == FontWeight.Normal || x.FontWeight == FontWeight.Regular));
+                         skTypeface = SKTypeface.FromFile(f.FontPath);
+                         return new Skia.GlyphTypefaceImpl(skTypeface, FontSimulations.None);
+                     }
+                 }
+             }
+         }
+         else
+         {
+             skTypeface = SKTypeface.FromFile(fontif.FontPath);
+
+             FontSimulations res = FontSimulations.None;
+             if (weight != FontWeight.Normal && style != FontStyle.Normal)
+                 res = FontSimulations.Oblique | FontSimulations.Bold;
+             else if (style != FontStyle.Normal)
+                 res = FontSimulations.Oblique;
+             else if (weight != FontWeight.Normal)
+                 res = FontSimulations.Bold;
+             else
+                 res = FontSimulations.None;
+
+
+             return new Skia.GlyphTypefaceImpl(skTypeface, res);
+         }
+     }
+     catch
+     {
+         return null;
+     }
+ }
         public bool TryCreateGlyphTypeface(string familyName, FontStyle style, FontWeight weight, FontStretch stretch, [NotNullWhen(true)] out IGlyphTypeface glyphTypeface)
         {
             SKTypeface skTypeface;
@@ -179,69 +241,7 @@ namespace Avalonia.Benchmarks
             }
         }
 
-        private IGlyphTypeface GetFont(string fontName, FontStyle style, FontWeight weight)
-        {
-            try
-            {
-                SKTypeface skTypeface;
-
-                FontInfo fontif = InstalledFont.Find(x => x.FontName == fontName);
-                if (fontif.SubFonts.Count > 0)
-                {
-                    var f = fontif.SubFonts.Find(x => (x.FontWeight == weight && x.FontStyle == style));
-                    if (f != null)//是否全部符合
-                    {
-                        skTypeface = SKTypeface.FromFile(f.FontPath);
-                        return new Skia.GlyphTypefaceImpl(skTypeface, FontSimulations.None);
-                    }
-                    else
-                    {//第二侧重字体粗细，是否符合当前粗细
-                        f = fontif.SubFonts.Find(x => (x.FontWeight == weight));
-                        if (f != null)
-                        {
-                            skTypeface = SKTypeface.FromFile(f.FontPath);
-                            return new Skia.GlyphTypefaceImpl(skTypeface, style == FontStyle.Normal ? FontSimulations.None : FontSimulations.Oblique);
-                        }
-                        else
-                        {//第三侧重字体样式，是否符合当前样式
-                            f = fontif.SubFonts.Find(x => (x.FontStyle == style));
-                            if (f != null)
-                            {
-                                skTypeface = SKTypeface.FromFile(f.FontPath);
-                                return new Skia.GlyphTypefaceImpl(skTypeface, weight == FontWeight.Normal ? FontSimulations.None : FontSimulations.Bold);
-                            }
-                            else
-                            {//最后，全部不匹配，返回normal,若还没有，跳Exception
-                                f = fontif.SubFonts.Find(x => (x.FontWeight == FontWeight.Normal));
-                                skTypeface = SKTypeface.FromFile(f.FontPath);
-                                return new Skia.GlyphTypefaceImpl(skTypeface, FontSimulations.Oblique | FontSimulations.Bold);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    skTypeface = SKTypeface.FromFile(fontif.FontPath);
-
-                    FontSimulations res = FontSimulations.None;
-                    if (weight != FontWeight.Normal && style != FontStyle.Normal)
-                        res = FontSimulations.Oblique | FontSimulations.Bold;
-                    else if (style != FontStyle.Normal)
-                        res = FontSimulations.Oblique;
-                    else if (weight != FontWeight.Normal)
-                        res = FontSimulations.Bold;
-                    else
-                        res = FontSimulations.None;
-
-
-                    return new Skia.GlyphTypefaceImpl(skTypeface, res);
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
+      
 
         public bool TryCreateGlyphTypeface(Stream stream, [NotNullWhen(true)] out IGlyphTypeface glyphTypeface)
         {
