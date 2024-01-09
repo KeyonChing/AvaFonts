@@ -75,5 +75,6 @@
       }
 ```
 
-
+# Tips
+旧版的Avalonia解决方案升级Avalonia 0.11.0后，会导致设计器报错无法显示，若出现这种情况，请安装我修改后的扩展，安装方式请看 [Avalonia for VisualStudio 2022](https://github.com/KeyonChing/AvaFonts/edit/main/AvaloniaDesigner.md)
     
